@@ -38,14 +38,43 @@ def foo():
 
 소스코드모드 : 컨트롤+/ 
 
-ㅓ
 
-**bold**  글자 양쪽 ** 또는 컨트롤+b
 
-*emphasis*	글자 양쪽 * 또는 컨트롤+i
+ 볼드체 : `**bold**`  글자 양쪽 ** 또는 컨트롤+b
 
-`test`	글자 양쪽 ` 
+**bold**
 
 
 
- 
+강조 : `*emphasis*`	글자 양쪽 * 또는 컨트롤+i
+
+*emphasis*
+
+
+
+변수화 : `test`	글자 양쪽 ` 
+
+
+
+ divider
+
+`---`
+
+---
+
+
+
+link
+
+`[name](url)`
+
+[naver](https://www.naver.com)
+
+
+
+
+
+
+
+
+
