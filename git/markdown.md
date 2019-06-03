@@ -8,16 +8,28 @@
 
 ##### header5	#####
 
-> Markdown	>
+
+
+### 인용구
+
+​	`>`내용     
+
+> Markdown
 
 
 
-1. number	1.
+### 번호 목록
+
+`1.내용`
+
+1. number	
 2. number
 
 
 
-​	```
+### 코드펜스
+
+` ``` `
 
 ```python
 def foo():
@@ -26,7 +38,9 @@ def foo():
 
 
 
+### 표 삽입
 
+Ctrl+T
 
 | Header | Header | Header |
 | ------ | ------ | ------ |
@@ -36,7 +50,9 @@ def foo():
 
 
 
-소스코드모드 : 컨트롤+/ 
+### 소스코드모드 : 컨트롤+/ 
+
+
 
 
 
