@@ -1,4 +1,4 @@
-﻿
+
 # Created by https://www.gitignore.io/api/flask,django,python,windows,pycharm
 # Edit at https://www.gitignore.io/?templates=flask,django,python,windows,pycharm
 
@@ -360,3 +360,4 @@ $RECYCLE.BIN/
 
 hackerthon/.idea/
 hackerthon/telegram/.idea/
+hackerthon/assets/*
