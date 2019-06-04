@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Local apps
     'pages.apps.PagesConfig',  # pages 파일 중 apps.py의 PagesConfig class
+    'utilities.apps.UtilitiesConfig',
     
     # Django apps
     'django.contrib.admin',

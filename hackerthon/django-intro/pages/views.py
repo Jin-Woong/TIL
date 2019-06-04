@@ -6,21 +6,21 @@ import requests
 
 # Create your views here.
 def index(request):  # request : 사용자의 요청
-    return render(request, 'index.html')  # index.html 로 이동 + request 전달
+    return render(request, 'pages/index.html')  # index.html 로 이동 + request 전달
 
 
 def dinner(request):
     menu = ['순대', '국수', '곱창', '피자']
     choice = random.choice(menu)
-    return render(request, 'dinner.html', {'dinner': choice})  # dictionary 형태로 전달
+    return render(request, 'pages/dinner.html', {'dinner': choice})  # dictionary 형태로 전달
 
 
 def greeting(request, name):
-    return render(request, 'greeting.html', {'name': name})
+    return render(request, 'pages/greeting.html', {'name': name})
 
 
 def introduce(request, name, age):
-    return render(request, 'introduce.html', {'name': name, 'age': age})
+    return render(request, 'pages/introduce.html', {'name': name, 'age': age})
 
 
 def template_language(request):
@@ -38,15 +38,15 @@ def template_language(request):
         'empty_list': empty_list,
     }
 
-    return render(request, 'template_language.html', context)
+    return render(request, 'pages/template_language.html', context)
 
 
 def isitbirthday(request):
-    return render(request, 'isitbirthday.html')
+    return render(request, 'pages/isitbirthday.html')
 
 
 def throw(request):
-    return render(request, 'throw.html')
+    return render(request, 'pages/throw.html')
 
 
 def catch(request):
@@ -56,11 +56,11 @@ def catch(request):
         'message': message,
         'message2': message2,
     }
-    return render(request, 'catch.html', context)
+    return render(request, 'pages/catch.html', context)
 
 
 def artii(request):
-    return render(request, 'artii.html')
+    return render(request, 'pages/artii.html')
 
 
 def result(request):
@@ -85,5 +85,8 @@ def result(request):
         'font': font,
         'artii_result': artii_result,
     }
-    return render(request, 'result.html', context)
+    return render(request, 'pages/result.html', context)
 
+
+def static_example(request):
+    return render(request, 'pages/static_example.html')
