@@ -18,6 +18,7 @@ from django.urls import path
 from pages import views  # views에 매핑시켜주기 위한 import
 
 urlpatterns = [
+    path('template_language', views.template_language),
     path('introduce/<str:name>/<int:age>/', views.introduce),
     path('greeting/<str:name>/', views.greeting),
     path('dinner/', views.dinner),
