@@ -15,3 +15,7 @@ def dinner(request):
 
 def greeting(request, name):
     return render(request, 'greeting.html', {'name': name})
+
+
+def introduce(request, name, age):
+    return render(request, 'introduce.html', {'name': name, 'age': age})
