@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>1. 반복문</h3>
+    {% for menu in menus %}
+        <p>{{menu}}</p>
+    {% endfor %}
+
+    <hr/>
+
+    {% for menu in menus %}
+        <p>{{forloop.counter}} {{menu}}</p>
+    {% endfor %}
+    <hr/>
+
+    {% for user in empty_list %}
+        <p>{{user}}</p>
+    {% empty %}
+    <!-- empty: for 태그 안에 optional, 빈리스트일 때 출력-->
+        <p>현재 가입한 유저가 없습니다</p>
+    {% endfor %}
+    <hr/>
+
+    <h3>2. 조건문</h3>
+    {% if '짜장면' in menus %}
+        <p>짜장면 있음</p>
+    {% endif %}
+    <hr/>
+
+    {% for menu in menus %}
+        {{forloop.counter}}번째 도는 중
+        {% if forloop.first %}}
+            <p>짜장면 + 고추가루</p>
+        {% else %}
+            <p>{{menu}}</p>
+        {% endif %}
+
+    {% endfor %}
+
+    <hr/>
+    <h3>3. length filter 활용</h3>
+    {% for message in messages %}
+        {% if message|length > 5 %}
+            <p>글씨가 너무 길어요</p>
+        {% else %}
+            <p>{{message}} {{message|length}}</p>
+        {% endif %}
+    {% endfor %}
+
+    <h3>4. lorem ipsum</h3>
+    <!--로렘 입숨, 표준 채우기 텍스트로 문서에서 텍스트가 보이면 사람들은 전체적인 프레젠테이션보다는
+        텍스트에 담긴 뜻에 집중하는 경향이 있어서 출판사들은 서체나 디자인을 보일 때는
+        프레젠테이션 자체에 초점을 맞추기 위해 로렘 입숨을 사용한다.-->
+    {% lorem %}
+    {% lorem 3 w %}
+    {% lorem 3 w random %}
+    {% lorem 2 p %}
+
+    <hr/>
+    <h3>5. 글자수 제한(truncate)</h3>
+    <p>{{ my_sentence|truncatewords:3 }}</p>    단어 단위로 제한
+    <p>{{ my_sentence|truncatechars:4 }}</p>     문자 단위로 제한
+    <p>{{ my_sentence|truncatechars:10 }}</p>
+
+    <hr/>
+    <h3>6. 글자 관련 필터</h3>
+    <p>{{ 'abc'|length }}</p>
+    <p>{{ 'ABC'|lower }}</p>
+    <p>{{ 'abc'|upper }}</p>
+    <p>{{ my_sentence|title }}</p>  <!-- 모든 단어의 첫글자를 대문자로 변환-->
+    <p>{{ menus|random }}</p>       <!--랜덤값 추출-->
+
+    <hr/>
+    <h3>7. 연산</h3>
+    <p>{{ 4|add:6 }}</p> <!-- 4+6 -->
+    <!--더 많은 연산자 : https://pypi.org/project/django-mathfilters/ -->
+
+    <hr/>
+    <h3>8. 날짜표현</h3>
+    <p>{{ datetimenow }}</p>
+    <p>{% now "DATETIME_FORMAT" %}</p>
+    <p>{% now "SHORT_DATETIME_FORMAT" %}</p>
+    <p>{% now "DATE_FORMAT" %}</p>
+    <p>{% now "SHORT_DATE_FORMAT" %}</p>
+    <hr/>
+    <!-- 임의의 포맷으로 변경 -->
+    <p>{% now "Y년 m월 d일 (D)" %}</p>
+    <p>{% now "Y m d" %}</p>
+    <hr/>
+    <!-- 날짜를 변수로 전달 -->
+    {% now "Y" as current_year %}
+    <p> Copyright {{current_year}}</p>
+
+    <!-- 날짜를 전달받아 포맷 변경 -->
+    <p>{{ datetimenow|date:"SHORT_DATE_FORMAT" }}</p>
+    <hr/>
+
+    <!-- 값을 url 로 변환-->
+    <p>{{'google.com'|urlize}}</p>
+</body>
+
+</html>

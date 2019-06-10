@@ -1,0 +1,7 @@
+{% extends 'base.html' %}<!-- base 의 block body 에 보여진다. -->
+{% load static %}
+
+{% block body %}
+    <h2>Welcome to utilities page</h2>
+    <img src="{% static 'utilities/images/simson2.jpg' %}" alt="심슨">
+{% endblock %}

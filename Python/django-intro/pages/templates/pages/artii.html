@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1> 환영합니다. artii </h1>
+    <form action="/pages/result/">
+        영단어를 입력해주세요:
+        <input type="text" name="word">
+        <input type="submit">
+    </form>
+{% endblock %}
