@@ -1,3 +1,8 @@
+## POST 방식으로 변경
+
+boards/templates/boards/new.html 수정
+
+```html
 {% extends 'boards/base.html' %}
 
 {% block body %}
@@ -17,3 +22,29 @@
     </form>
     <a href="/boards/">Back</a>
 {% endblock %}
+```
+
+method="post", {% csrf_token %} 추가
+
+
+
+boards/views.py 수정
+
+```python
+from django.shortcuts import render, redirect
+
+...
+
+def create(request):
+    title = request.POST.get('title')
+    content = request.POST.get('content')
+    print(request.POST)
+    print(title, content)
+    board = Board(title=title, content=content)
+    board.save()
+    return redirect('/boards/')
+	# get 요청은 작업이 끝나면 render 로 처리,
+    # post 요청은 작업이 긑나면 redirect 로 처리한다.
+
+```
+

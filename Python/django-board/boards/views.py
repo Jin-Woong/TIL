@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Board
 
 
@@ -15,9 +15,17 @@ def new(request):
 
 
 def create(request):
-    title = request.GET.get('title')
-    content = request.GET.get('content')
+    title = request.POST.get('title')
+    content = request.POST.get('content')
+    print(request.POST)
     print(title, content)
     board = Board(title=title, content=content)
     board.save()
-    return render(request, 'boards/create.html')
+    return redirect('/boards/')
+    # get 요청은 작업이 끝나면 render 로 처리,
+    # post 요청은 작업이 긑나면 redirect 로 처리한다.
+
+
+# 특정 게시글 하나만 가져온다.
+def detail(request, id):
+    return render(request, 'boards/detail.html')
