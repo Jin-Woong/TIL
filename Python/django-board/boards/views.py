@@ -21,11 +21,25 @@ def create(request):
     print(title, content)
     board = Board(title=title, content=content)
     board.save()
-    return redirect('/boards/')
+    return redirect(f'/boards/{board.id}')
     # get 요청은 작업이 끝나면 render 로 처리,
     # post 요청은 작업이 긑나면 redirect 로 처리한다.
 
 
 # 특정 게시글 하나만 가져온다.
 def detail(request, id):
-    return render(request, 'boards/detail.html')
+    # Board 클래스를 사용해서 id 값에 맞는 데이터를 가지고 온다.
+    # context 로 넘겨서 detail.html 페이지에서 title 과 content 를 출력
+    board = Board.objects.get(id=id)
+
+    context = {
+        'board': board,
+    }
+    return render(request, 'boards/detail.html', context)
+
+
+# 특정 게시글 하나만 삭제한다.
+def delete(requests, id):
+    board = Board.objects.get(id=id)
+    board.delete()
+    return redirect('/boards/')  # 삭제 후 리스트가 나오는 index 페이지로 이동
