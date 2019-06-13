@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>New page</h1>
-    <form action="/boards/create/" method="post">
+    <form action="{% url 'boards:new' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- for="id" -> 해당 태그의 id를 찾는다 -->
         <!-- name : 데이터가 담겨 전송되는 이름 변수명과 비슷-->
@@ -12,7 +12,7 @@
         <label for="content">Content</label><br/>
         <textarea name="content" id="content"></textarea><br/>
         <!--textarea#content 를 입력하고 tab 을 누르면 id가 content 인 textarea 생성-->
-
+        <input type="file" name="image" accept="image/*"/><br/>
         <input type="submit" />
     </form>
     <a href="/boards/">Back</a>

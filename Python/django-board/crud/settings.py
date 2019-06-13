@@ -36,6 +36,9 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'django_extensions',
+
+
+    'imagekit',
     
     # Local
     'django.contrib.admin',
@@ -125,3 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# domain.com/media/sample.jpg
+MEDIA_URL = '/media/'  # 불러올 파일이 있는 경로
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 파일을 저장할 디렉토리경로, BASE_DIR == 프로젝트 root directory

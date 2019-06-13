@@ -21,7 +21,8 @@ def new(request):
     else:
         title = request.POST.get('title')
         content = request.POST.get('content')
-        board = Board(title=title, content=content)
+        image = request.FILES.get('image')
+        board = Board(title=title, content=content, image=image)
         board.save()
         return redirect('boards:detail', board.id)
 
@@ -77,9 +78,11 @@ def edit(request, board_id):
         # detail page 로 redirect 한다.
         title = request.POST.get('title')
         content = request.POST.get('content')
+        image = request.FILES.get('image')
         # 수정로직
         board.title = title
         board.content = content
+        board.image = image
         board.save()
         return redirect('boards:detail', board_id)
 
