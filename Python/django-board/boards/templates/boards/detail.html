@@ -1,15 +1,35 @@
 {% extends 'boards/base.html' %}
 
 {% block body %}
-    <h1>Detail page</h1>
-    <p>{{board.id}}번째 글</p>
-    <p>{{board.created_at}}</p>
-    <p>내용 : {{board.content}}</p>
-    <hr/>
-    <form action="/boards/{{board.id}}/delete/" method="post">
-        {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="삭제하기">
-    </form>
-    <a href="/boards/">Back</a>
+<h1>Detail</h1>
+<h2>{{ board.title }}</h2>
+<p>{{ board.id }}번째 글</p>
+<p>{{ board.created_at }}</p>
+<hr/>
+<p>{{ board.content }}</p>
+<hr/>
+<p>
+    <b>댓글 목록</b>
+</p>
+{% for comment in comments %}
+<li>{{ comment.content }}</li>
+<form action="{% url 'boards:comment_delete' board_id=board.id comment_id=comment.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="댓글삭제"/>
+</form>
+{% empty %}
+<li>아직 댓글이 없습니다.</li>
+{% endfor %}
 
+<form action="{% url 'boards:comment_create' board.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="댓글을 입력하세요"/>
+    <input type="submit" value="댓글달기"/>
+</form>
+<a href="{% url 'boards:index' %}">BACK</a>
+<form action="{% url 'boards:delete' board.id %}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="삭제하기"/>
+</form>
+<a href="{% url 'boards:edit' board.id %}">[수정하기]</a>
 {% endblock %}

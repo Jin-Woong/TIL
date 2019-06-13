@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 'boards.apps.BoardsConfig'
     'boards',
+
+    # 3rd party apps
+    'django_extensions',
     
     # Local
     'django.contrib.admin',
