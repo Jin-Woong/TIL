@@ -63,5 +63,8 @@ def update(request, board_pk):
         form = BoardForm(initial=board.__dict__)  # board 데이터 할당
 
     # GET 요청 또는 유효하지 않는 값일 때
-    context = {'form': form}
+    context = {
+        'form': form,
+        'board_pk': board_pk,
+    }
     return render(request, 'boards/form.html', context)  # form 내에 데이터가 있는 상태로 보인다.
