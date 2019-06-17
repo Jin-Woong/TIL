@@ -17,9 +17,10 @@ def create(request):
         # Board 정보를 받아서 데이터베이스에 제공하는 로직
         form = BoardForm(request.POST)
         if form.is_valid():  # 유효성 검사
-            title = form.cleaned_data.get('title')  # cleaned_data : 값을 깔끔하게 다듬어서 꺼내는 요청
-            content = form.cleaned_data.get('content')
-            board = Board.objects.create(title=title, content=content)
+            # title = form.cleaned_data.get('title')  # cleaned_data : 값을 깔끔하게 다듬어서 꺼내는 요청
+            # content = form.cleaned_data.get('content')
+            # board = Board.objects.create(title=title, content=content)
+            board = form.save()
             return redirect('boards:detail', board.pk)
     else:  # GET 요청 또는 유효성 검사를 충족하지 못한 경우
         form = BoardForm()
@@ -49,11 +50,12 @@ def update(request, board_pk):
 
     # POST boards/3/update
     if request.method == 'POST':
-        form = BoardForm(request.POST)
+        form = BoardForm(request.POST, instance=board)
         if form.is_valid():
-            board.title = form.cleaned_data.get('title')
-            board.content = form.cleaned_data.get('content')
-            board.save()
+            # board.title = form.cleaned_data.get('title')
+            # board.content = form.cleaned_data.get('content')
+            # board.save()
+            board = form.save()  # instance=board -> Board 를 새로 생성하지않고 기존의 Board 를 업데이트
             return redirect('boards:detail', board.pk)
 
     # GET boards/3/update

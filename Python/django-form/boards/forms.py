@@ -1,7 +1,8 @@
 from django import forms
+from .models import Board
 
 
-class BoardForm(forms.Form):
+class BoardForm(forms.ModelForm):
     title = forms.CharField(
         max_length=20,
         label='제목',
@@ -12,7 +13,6 @@ class BoardForm(forms.Form):
             }
         )
     )
-
     content = forms.CharField(
         # textarea 처럼 꾸밀 수 있다.
         label='내용',
@@ -25,3 +25,7 @@ class BoardForm(forms.Form):
             }
         )
     )
+
+    class Meta:
+        model = Board
+        fields = ('title', 'content',)
