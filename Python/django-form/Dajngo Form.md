@@ -16,7 +16,7 @@ $ python manage.py startapp boards
 
 
 
-## settings.py 수정
+## django_form/settings.py 수정
 
 ```python
 #...
@@ -44,16 +44,26 @@ TIME_ZONE = 'Asia/Seoul'
 
 
 
-boards/models.py 수정
+## boards/models.py 수정
 
 ```python
 from django.db import models
 
 
-# Create your models here.
 class Board(models.Model):
     title = models.CharField(max_length=20)  # input
     content = models.TextField()  # textarea
     createed_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 ```
+
+ - 모델 생성 후 migration
+
+   $ python manage.py makemigrations
+
+   $ python manage.py migrate
+
+
+
+## boards/admin.py 수정
+
