@@ -9,10 +9,11 @@
     <p>글 생성시각 : {{board.created_at}}</p>
     <p>글 수정시각 : {{board.updated_at}}</p>
     <hr/>
-    <a href="{% url 'boards:index'%}">[뒤로가기]</a>
     <form action="{% url 'boards:delete' board_pk=board.pk %}" method="post">
         {% csrf_token %}
         <input type="submit" value="[삭제하기]">
     </form>
+    <a href="{% url 'boards:update' board.pk %}">[수정하기]</a>
+    <a href="{% url 'boards:index'%}">[뒤로가기]</a>
 
 {% endblock %}

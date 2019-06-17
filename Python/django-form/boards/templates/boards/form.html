@@ -6,6 +6,7 @@
 
     <!-- POST /boards/create/-->
     <form action="" method="post">  <!-- 동일한 url 로 보낼 경우 action 생략 가능 -->
+                                    <!-- create 는 create 로, update 는 update 로 처리 -->
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="작성하기"/>

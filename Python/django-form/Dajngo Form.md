@@ -84,7 +84,7 @@ class BoardAdmin(admin.ModelAdmin):  # admin.ModelAdmin 을 상속받는다.
 
 ![1560735385122](assets/1560735385122.png)
 
-
+​	- BOARD 추가 버튼을 눌러 데이터를 입력할 수 있다.
 
 ## index page URL 경로 작성
 
