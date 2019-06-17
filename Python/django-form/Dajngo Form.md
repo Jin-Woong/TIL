@@ -84,3 +84,39 @@ class BoardAdmin(admin.ModelAdmin):  # admin.ModelAdmin 을 상속받는다.
 
 ![1560735385122](assets/1560735385122.png)
 
+
+
+## URL 경로 작성
+
+### django_form/urls.py 수정
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('boards/', include('boards.urls')),
+    path('admin/', admin.site.urls),
+]
+```
+
+	- boards/ 로 들어오는 url들을  boards.urls에서 처리하도록 넘겨준다.
+
+
+
+### boards/urls.py 생성
+
+```python
+from . import views
+from django.urls import path
+
+# 경로 맵 이름 지정 'boards:detail
+app_name = 'boards'
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+```
+
+
+
