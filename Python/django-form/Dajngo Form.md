@@ -134,3 +134,26 @@ def index(request):
 
 
 
+
+
+
+
+## django bootstrap
+
+$ pip install django-bootstrap4
+
+
+
+### django-form/setting  수정
+
+```python
+INSTALLED_APPS = [
+	#...
+
+    # 3rd party apps
+    'bootstrap4',
+    
+    #...
+]   
+```
+
