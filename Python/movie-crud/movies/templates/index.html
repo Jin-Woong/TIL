@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Movie!!</h1>
+    <a href="{% url 'movies:create' %}">
+        <p>새 영화 등록</p>
+    </a>
+    {% for movie in movies %}
+        <a href="{% url 'movies:detail' movie_id=movie.id %}">
+            제목 : {{ movie.title }}
+        </a>
+        <p>평점 : {{ movie.score }}</p>
+        <hr/>
+    {% endfor %}
+{% endblock %}

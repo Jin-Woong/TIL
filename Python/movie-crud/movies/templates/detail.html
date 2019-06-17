@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<p>제목 : {{movie.title}} </p>
+<p>원제목 : {{movie.title_origin}}</p>
+<p>투표수 : {{movie.vote_count}}</p>
+<p>개봉일 : {{movie.open_date}}</p>
+<p>장르 : {{movie.genre}}</p>
+<p>평점 : {{movie.score}}</p>
+<p><img src="{{movie.poster_url}}" alt="영화포스터">
+<p>줄거리 : {{movie.description}}</p>
+
+<a href="{% url 'movies:index' %}">목록</a>
+<a href="{% url 'movies:update' movie_id=movie.id %}">수정</a>
+<a href="{% url 'movies:delete' movie_id=movie.id %}">삭제</a>
+
+{% endblock %}

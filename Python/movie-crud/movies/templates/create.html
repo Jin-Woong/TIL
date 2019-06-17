@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="{% url 'movies:create' %}" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="title"/></td>
+        </tr>
+        <tr>
+            <td>원제목 </td>
+            <td><input type="text" name="title_origin"/></td>
+        </tr>
+        <tr>
+            <td>투표수</td>
+            <td><input type="number" name="vote_count"/></td>
+        </tr>
+        <tr>
+            <td>개봉일</td>
+            <td><input type="date" name="open_date"/></td>
+        </tr>
+        <tr>
+            <td>장르</td>
+            <td><input type="text" name="genre"/></td>
+        </tr>
+
+        <tr>
+            <td>평점</td>
+            <td><input type="number" name="score" step="0.5" min="0" max="5"/></td>
+        </tr>
+        <tr>
+            <td>포스터주소</td>
+            <td><input type="text" name="poster_url"/></td>
+        </tr>
+        <tr>
+            <td>줄거리</td>
+            <td><input type="textarea" name="description"/><br/></td>
+        </tr>
+
+    </table>
+    <input type="submit" value="등록하기">
+</form>
+
+{% endblock %}
