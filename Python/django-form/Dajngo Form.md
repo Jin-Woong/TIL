@@ -33,3 +33,27 @@ LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
 #...
 ```
+
+
+
+## .gitignore 생성
+
+<https://www.gitignore.io/>
+
+![1560732000359](assets/1560732000359.png)
+
+
+
+boards/models.py 수정
+
+```python
+from django.db import models
+
+
+# Create your models here.
+class Board(models.Model):
+    title = models.CharField(max_length=20)  # input
+    content = models.TextField()  # textarea
+    createed_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+```
