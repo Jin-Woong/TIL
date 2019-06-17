@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from .models import Board
 from .forms import BoardForm
 
 
+@require_GET
 def index(request):
     boards = Board.objects.order_by('-pk')
     context = {'boards': boards, }
     return render(request, 'boards/index.html', context)
 
 
+@require_http_methods(['GET', 'POST'])
 def create(request):
     if request.method == 'POST':
         # Board 정보를 받아서 데이터베이스에 제공하는 로직
@@ -25,7 +28,16 @@ def create(request):
 
 
 # boards/3/
+@require_GET
 def detail(request, board_pk):
     board = get_object_or_404(Board, pk=board_pk)
     context = {'board': board}
     return render(request, 'boards/detail.html', context)
+
+
+# delete 요청을 POST 요청으로만
+@require_POST
+def delete(request, board_pk):
+    board = get_object_or_404(Board, pk=board_pk)
+    board.delete()
+    return redirect('boards:index')

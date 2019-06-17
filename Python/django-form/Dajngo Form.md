@@ -86,7 +86,7 @@ class BoardAdmin(admin.ModelAdmin):  # admin.ModelAdmin 을 상속받는다.
 
 
 
-## URL 경로 작성
+## index page URL 경로 작성
 
 ### django_form/urls.py 수정
 
@@ -116,6 +116,20 @@ app_name = 'boards'
 urlpatterns = [
     path('', views.index, name='index'),
 ]
+```
+
+
+
+### boards/views.py 수정
+
+```python
+from django.shortcuts import render
+from .models import Board
+
+def index(request):
+    boards = Board.objects.order_by('-pk')
+    context = {'boards': boards, }
+    return render(request, 'boards/index.html', context)
 ```
 
 

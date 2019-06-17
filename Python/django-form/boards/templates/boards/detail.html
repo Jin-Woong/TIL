@@ -10,4 +10,9 @@
     <p>글 수정시각 : {{board.updated_at}}</p>
     <hr/>
     <a href="{% url 'boards:index'%}">[뒤로가기]</a>
+    <form action="{% url 'boards:delete' board_pk=board.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="[삭제하기]">
+    </form>
+
 {% endblock %}
