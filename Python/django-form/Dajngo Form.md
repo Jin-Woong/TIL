@@ -157,3 +157,65 @@ INSTALLED_APPS = [
 ]   
 ```
 
+
+
+### boards/base.html 수정
+
+```html
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% bootstrap_javascript jquery='full' %}
+    <!-- 자바스크립트 -->
+</body>
+</html>
+```
+
+
+
+### boards/form.html 수정
+
+```html
+{% extends 'boards/base.html' %}
+{% load bootstrap4 %}
+
+
+<!-- GET /boards/create/ -->
+{% block body %}
+    {% if request.resolver_match.url_name == 'create' %}
+    <h1>새로운 게시글 작성</h1>
+    {% else %} <!-- update 가 들어오면 -->
+    <h1>게시글 수정</h1>
+    {% endif %}
+
+    <!-- POST /boards/create/ -->
+    <form action="" method="post">  <!-- 동일한 url 로 보낼 경우 action 생략 가능 -->
+                                    <!-- create 는 create 로, update 는 update 로 처리 -->
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}  <!-- bootstrap_form 을 form 에 적용 -->
+        {% buttons submit="Submit" reset="Cancel" %}
+        {% endbuttons %}
+    </form>
+
+    {% if request.resolver_match.url_name == 'create' %}
+    <a href="{% url 'boards:index' %}">[뒤로가기]</a>
+    {% else %}
+    <a href="{% url 'boards:detail' board_pk %}">[뒤로가기]</a>
+    {% endif %}
+
+{% endblock %}
+```
+
+
+
