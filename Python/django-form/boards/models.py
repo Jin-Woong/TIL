@@ -8,6 +8,12 @@ class Board(models.Model):
     content = models.TextField()  # textarea
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='like_boards',  # board.like_users.all()과 같이 참조할 수 있다.
+        blank=True,
+    )
 
     # 데이터 표현식 변경
     def __str__(self):

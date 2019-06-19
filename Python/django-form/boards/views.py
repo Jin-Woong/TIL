@@ -37,7 +37,7 @@ def create(request):
 def detail(request, board_pk):
     board = get_object_or_404(Board, pk=board_pk)
     comments = board.comment_set.order_by('-pk')
-    comment_form  = CommentForm()
+    comment_form = CommentForm()
     context = {
         'board': board,
         'comment_form': comment_form,
@@ -95,12 +95,12 @@ def comments_create(request, board_pk):
     # 유효성 검사
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
-    # 유저 정보 할당
+        # 유저 정보 할당
         comment.user = request.user
         # 같은 말 comment.user_id = request.user.id
-    # board 정보 할당
+        # board 정보 할당
         comment.board_id = board_pk  # pk 로 할당
-    # 저장
+        # 저장
         comment.save()
 
     return redirect('boards:detail', board_pk)
@@ -112,3 +112,16 @@ def comments_delete(request, board_pk, comment_pk):
     if comment.user == request.user:
         comment.delete()
     return redirect('boards:detail', board_pk)
+
+
+def like(request, board_pk):
+    board = get_object_or_404(Board, pk=board_pk)
+    user = request.user
+    # 보드를 좋아요 누른 모든 사람 중에서 user 가 없다면
+    # 좋아요, 아니라면 좋아요취소
+    if user in board.like_users.all():
+        board.like_users.remove(user)
+    else:
+        board.like_users.add(user)
+    return redirect('boards:detail', board_pk)
+
