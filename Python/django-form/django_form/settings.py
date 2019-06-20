@@ -27,6 +27,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',  # 회원가입시 충돌을 처리하기 위해 주석처리
+)
 
 INSTALLED_APPS = [
     # local apps
@@ -35,6 +39,10 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'bootstrap4',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.kakao',
 
     # django apps
     'django.contrib.admin',
@@ -43,7 +51,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # 추가
+
 ]
+# 'django.contrib.sites'관련
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,3 +136,6 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.user'
 # get_user_model() 사용시 반환되는 값,
 # 없을경우 기본 django mode 이 반환된다.
+
+LOGIN_REDIRECT_URL = 'boards:index'
+# 소셜 로그인 후 redirect 할 페이지

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from .models import Board, Comment
 from .forms import BoardForm, CommentForm
 
@@ -38,10 +39,12 @@ def detail(request, board_pk):
     board = get_object_or_404(Board, pk=board_pk)
     comments = board.comment_set.order_by('-pk')
     comment_form = CommentForm()
+    person = get_object_or_404(get_user_model(), pk=board.user_id)
     context = {
         'board': board,
         'comment_form': comment_form,
         'comments': comments,
+        'person': person,
     }
     return render(request, 'boards/detail.html', context)
 
@@ -114,6 +117,7 @@ def comments_delete(request, board_pk, comment_pk):
     return redirect('boards:detail', board_pk)
 
 
+@login_required()
 def like(request, board_pk):
     board = get_object_or_404(Board, pk=board_pk)
     user = request.user
@@ -125,3 +129,25 @@ def like(request, board_pk):
         board.like_users.add(user)
     return redirect('boards:detail', board_pk)
 
+
+@login_required()
+def follow(request, board_pk, user_pk):
+    # 팔로우 기능
+    user = request.user
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    print('user', user)
+    print('person', user)
+    print('board_pk', board_pk)
+    print('user_pk', user_pk)
+
+    if user != person:
+        print(3)
+        if user in person.followers.all():
+            person.followers.remove(user)
+            print(2)
+        else:
+            person.followers.add(user)
+            print(1)
+    print(person.followers.all())
+
+    return redirect('boards:detail', board_pk)
