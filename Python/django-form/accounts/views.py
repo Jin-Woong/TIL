@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required  # 로그인이 반드시 필요하게끔 만듬
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
-from .forms import CustomUserChangeForm
-from IPython import embed
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
-# Create your views here.
 @require_http_methods(['GET', 'POST'])
 def signup(request):
     # 사용자가 로그인 상태에서 또 로그인 화면이 뜨지 않게 하는 방법
@@ -16,14 +14,14 @@ def signup(request):
     # POST
     if request.method == 'POST':
         # 사용자 회원가입 로직
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():  # 사용자가 정보를 담아서 모든 정보가 유효하다면
             user = form.save()  # 회원가입 된 상태를 뜻함.
             auth_login(request, user)  # 회원가입과 동시에 로그인 상태를 만듬
             return redirect('boards:index')
     # GET accounts/signup/
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
         # context = {'form': form} # 주석처리 가능
         # return render(request, 'accounts/signup.html', context) # 주석처리 가능
     # 유효하지 않다면 회원가입 다시 해주세요 사용자에게 보여줘야 함.
